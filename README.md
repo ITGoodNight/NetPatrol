@@ -40,7 +40,11 @@ cd frontend && npm install && npm run build && cd ..
 python run_app.py
 ```
 
-> 前端改动**不需要**重启后端（静态文件每次请求都从磁盘读取）；后端改动需要重启进程。
+> 改动前端（`frontend/`）要先 `npm run build` 重新构建，之后**刷新浏览器**即可，不用重启后端；
+> 改动后端（`backend/`、`modules/`）必须重启进程。
+>
+> ⚠️ 后端**只在启动时**检查 `frontend/dist` 是否存在，所以请**先构建、后启动**；
+> 若启动时前端尚未构建，之后补构建也需要重启才生效。
 
 **前端开发模式（可选）**
 
@@ -54,7 +58,7 @@ cd frontend && npm run dev     # http://localhost:5173，/api 已自动代理到
 pyinstaller NetPatrol.spec
 ```
 
-产物在 `dist/NetPatrol/`。（PyInstaller 采用 GPL + "打包例外"条款，用它打包自有/闭源项目是被允许的。）
+产物在 `dist/NetPatrol/`。
 
 ## 使用说明
 
