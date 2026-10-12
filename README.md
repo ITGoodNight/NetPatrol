@@ -1,6 +1,6 @@
 # NetPatrol · 网络设备自动化巡检系统
 
-一键批量登录网络设备、执行巡检命令、生成 HTML / TXT 报告，支持定时巡检与实时日志。
+网络设备、执行巡检命令、生成 HTML / TXT 报告，支持定时巡检与实时日志。
 
 支持华为、华三、思科、锐捷、中兴等主流厂商设备，基于 [Netmiko](https://github.com/ktbyers/netmiko)。
 
