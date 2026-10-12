@@ -11,8 +11,10 @@ project_root = os.path.abspath('.')
 # netmiko / ntc_templates 需要额外数据文件
 datas = [
     (os.path.join(project_root, 'frontend', 'dist'), os.path.join('frontend', 'dist')),
-    (os.path.join(project_root, 'config', 'config.json'), os.path.join('config', 'config.json')),
-    (os.path.join(project_root, 'config', 'commands.txt'), os.path.join('config', 'commands.txt')),
+    # 注意：datas 第二项是【目标目录】，不是完整路径，文件名由源文件决定。
+    # 这里用默认配置模板，避免把开发机的本地设置（定时开关、时间、次数等）带给用户。
+    (os.path.join(project_root, 'config', 'config.example.json'), 'config'),
+    (os.path.join(project_root, 'config', 'commands.txt'), 'config'),
 ]
 datas += collect_data_files('netmiko')
 datas += collect_data_files('ntc_templates')

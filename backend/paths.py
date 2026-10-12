@@ -50,11 +50,20 @@ def ensure_runtime_dirs() -> None:
     os.makedirs(REPORTS_DIR, exist_ok=True)
 
     if is_frozen():
-        for name in ('config.json', 'commands.txt'):
+        # 打包内可能以 config.json 或 config.example.json 的形式提供默认配置，两者都接受
+        sources = {
+            'config.json': ('config.json', 'config.example.json'),
+            'commands.txt': ('commands.txt',),
+        }
+        for name, candidates in sources.items():
             dst = os.path.join(CONFIG_DIR, name)
-            src = os.path.join(BUNDLE_CONFIG_DIR, name)
-            if not os.path.exists(dst) and os.path.exists(src):
-                shutil.copy2(src, dst)
+            if os.path.exists(dst):
+                continue
+            for candidate in candidates:
+                src = os.path.join(BUNDLE_CONFIG_DIR, candidate)
+                if os.path.isfile(src):
+                    shutil.copy2(src, dst)
+                    break
 
 
 def migrate_legacy_config_files() -> None:
