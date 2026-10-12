@@ -3,59 +3,15 @@
 """
 import os
 import sys
-import tempfile
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from typing import Dict, Any
+
+from fastapi import APIRouter
 
 # 确保可以 import modules/
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
-from modules.device_parser import DeviceParser
 
 router = APIRouter(prefix="/api/devices", tags=["devices"])
 
-
-@router.post("/upload")
-async def upload_device_list(file: UploadFile = File(...)):
-    """
-    上传设备清单 Excel 文件，返回解析后的设备列表
-    """
-    if not file.filename.endswith(('.xlsx', '.xls')):
-        raise HTTPException(status_code=400, detail="仅支持 Excel 文件 (.xlsx/.xls)")
-
-    # 将上传文件保存到临时目录
-    suffix = os.path.splitext(file.filename)[1]
-    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
-        content = await file.read()
-        tmp.write(content)
-        tmp_path = tmp.name
-
-    try:
-        parser = DeviceParser(tmp_path)
-        devices = parser.parse_devices()
-
-        # 返回时隐藏密码
-        safe_devices = []
-        for d in devices:
-            safe_devices.append({
-                "设备名称": d.get("设备名称", ""),
-                "设备类型": d.get("设备类型", ""),
-                "IP地址": d.get("IP地址", ""),
-                "端口号": d.get("端口号", ""),
-                "连接类型": d.get("连接类型", ""),
-                "用户名": d.get("用户名", ""),
-                "密码": "*" * len(d.get("密码", "")),
-                "_raw": d,  # 内部保留原始数据（不暴露到前端显示用）
-            })
-        return {"success": True, "count": len(devices), "devices": safe_devices}
-    except Exception as e:
-        raise HTTPException(status_code=422, detail=str(e))
-    finally:
-        try:
-            os.unlink(tmp_path)
-        except Exception:
-            pass
-
-
-from typing import Dict, Any
 
 @router.post("/test-connect")
 async def test_device_connection(payload: Dict[str, Any]):

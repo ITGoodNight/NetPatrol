@@ -19,13 +19,6 @@ http.interceptors.response.use(
 
 // ── 设备清单 ─────────────────────────────────────────────────────────────────
 export const deviceApi = {
-  upload: (file) => {
-    const form = new FormData()
-    form.append('file', file)
-    return http.post('/devices/upload', form, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    })
-  },
   testConnect: (deviceData) => http.post('/devices/test-connect', deviceData),
 }
 

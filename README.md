@@ -21,7 +21,7 @@
 
 | 层 | 技术 |
 |---|---|
-| 后端 | FastAPI · uvicorn · Netmiko · openpyxl |
+| 后端 | FastAPI · uvicorn · Netmiko |
 | 前端 | Vue 3 · Vite · Ant Design Vue · axios · dayjs |
 | 打包 | PyInstaller |
 
