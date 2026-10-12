@@ -1,0 +1,318 @@
+/* ============================================================
+   NetPatrol 全局样式 - 阿里云企业风格
+   ============================================================ */
+
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #1677ff;
+  --primary-hover: #4096ff;
+  --primary-dark: #0958d9;
+  --success: #52c41a;
+  --warning: #faad14;
+  --error: #ff4d4f;
+  --text-primary: #1d2129;
+  --text-secondary: #4e5969;
+  --text-tertiary: #86909c;
+  --border: #e5e6eb;
+  --bg-base: #f2f3f5;
+  --bg-white: #ffffff;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.1);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+  --nav-height: 56px;
+  --sidebar-width: 320px;
+  --radius: 6px;
+  --radius-lg: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #app {
+  height: 100%;
+  font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 滚动条美化 ─────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #c9cdd4; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #86909c; }
+
+/* ── Ant Design 全局覆盖 ─────────────────────────── */
+.ant-btn-primary {
+  background: var(--primary) !important;
+}
+
+/* 确认弹窗按钮：与导航栏深灰风格统一 */
+.ant-modal-confirm .ant-modal-confirm-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+.ant-modal-confirm .ant-modal-confirm-btns .ni-btn-confirm-danger {
+  background: #2d2d2d !important;
+  border-color: #2d2d2d !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  min-width: 80px;
+  font-weight: 500;
+}
+.ant-modal-confirm .ant-modal-confirm-btns .ni-btn-confirm-danger:hover {
+  background: #434343 !important;
+  border-color: #434343 !important;
+  color: #fff !important;
+}
+.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-default {
+  background: #f2f3f5 !important;
+  border-color: #f2f3f5 !important;
+  color: #4e5969 !important;
+  box-shadow: none !important;
+  min-width: 72px;
+}
+.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-default:hover {
+  background: #e5e6eb !important;
+  border-color: #e5e6eb !important;
+  color: #1d2129 !important;
+}
+.ant-progress-bg {
+  background: var(--primary) !important;
+}
+
+/* 分段选择按钮（巡检模式 / 连接协议等） */
+.ni-radio-segment {
+  width: 100%;
+  display: flex;
+}
+.ni-radio-segment .ant-radio-button-wrapper {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  height: 34px;
+  line-height: 32px;
+  background: #f2f3f5;
+  border-color: #e5e6eb !important;
+  color: #4e5969;
+}
+.ni-radio-segment .ant-radio-button-wrapper:not(:first-child)::before {
+  display: none;
+}
+.ni-radio-segment .ant-radio-button-wrapper-checked {
+  background: #1677ff !important;
+  border-color: #1677ff !important;
+  color: #fff !important;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(22, 119, 255, 0.25);
+}
+.ni-radio-segment .ant-radio-button-wrapper-checked:hover {
+  background: #4096ff !important;
+  border-color: #4096ff !important;
+  color: #fff !important;
+}
+
+/* ── 卡片 ────────────────────────────────────────── */
+.ni-card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+/* ── 统计卡片 ────────────────────────────────────── */
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  min-width: 110px;
+  transition: box-shadow .2s;
+}
+.stat-card:hover { box-shadow: var(--shadow-md); }
+.stat-card .stat-num {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.stat-card .stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+
+
+/* ── 页面顶部导航 ─────────────────────────────────── */
+.ni-navbar {
+  height: var(--nav-height);
+  background: #001529;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+}
+.ni-navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .5px;
+}
+.ni-navbar .brand-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ni-navbar .brand-icon .brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.ni-navbar .nav-spacer { flex: 1; }
+.ni-navbar .nav-action {
+  color: rgba(255,255,255,.75) !important;
+  font-size: 13px;
+}
+.ni-navbar .nav-action:hover { color: #fff !important; }
+
+/* ── 侧边配置面板 ─────────────────────────────────── */
+.ni-sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding-bottom: 12px;
+}
+
+/* ── 内容区域 ────────────────────────────────────── */
+.ni-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── 区块标题 ────────────────────────────────────── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+.section-header .section-icon {
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── 上传区域 ────────────────────────────────────── */
+.upload-dragger {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .2s;
+  background: #fafafa;
+}
+.upload-dragger:hover, .upload-dragger.drag-over {
+  border-color: var(--primary);
+  background: #e6f0ff;
+}
+.upload-dragger .upload-icon { font-size: 32px; color: #c9cdd4; }
+.upload-dragger .upload-hint { font-size: 12px; color: var(--text-tertiary); margin-top: 4px; }
+
+/* ── 标签页 ──────────────────────────────────────── */
+.ni-tabs .ant-tabs-nav { margin-bottom: 0 !important; }
+.ni-tabs .ant-tabs-tab { padding: 8px 16px !important; font-size: 13px !important; }
+
+/* ── 表格 ────────────────────────────────────────── */
+.ni-table .ant-table-thead > tr > th {
+  background: #f7f8fa !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  color: var(--text-secondary) !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 8px 12px !important;
+}
+.ni-table .ant-table-tbody > tr > td {
+  font-size: 13px !important;
+  padding: 6px 12px !important;
+}
+.ni-table .ant-table-tbody > tr:hover > td {
+  background: #f2f7ff !important;
+}
+
+/* ── 状态标签 ────────────────────────────────────── */
+.status-dot {
+  display: inline-block; width: 8px; height: 8px;
+  border-radius: 50%; margin-right: 6px;
+}
+.status-dot.running { background: var(--primary); animation: pulse 1.4s infinite; }
+.status-dot.success { background: var(--success); }
+.status-dot.error   { background: var(--error); }
+.status-dot.idle    { background: #c9cdd4; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .5; transform: scale(.85); }
+}
+
+/* ── 进度栏 ──────────────────────────────────────── */
+.progress-bar-wrap {
+  padding: 0 16px 8px;
+}
+
+/* ── 配置项行 ────────────────────────────────────── */
+.config-row {
+  display: flex; align-items: center;
+  gap: 8px; padding: 6px 0;
+}
+.config-row label {
+  font-size: 13px; color: var(--text-secondary);
+  white-space: nowrap; min-width: 90px;
+}
+
+/* ── 文件报告卡片 ─────────────────────────────────── */
+.report-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--bg-white);
+  cursor: pointer; transition: all .2s;
+}
+.report-item:hover { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(22,119,255,.1); }
+.report-item .report-name { font-size: 12px; flex: 1; word-break: break-all; color: var(--text-primary); }
+.report-item .report-size { font-size: 11px; color: var(--text-tertiary); }
+
+/* ── 动画 ────────────────────────────────────────── */
+.fade-enter-active, .fade-leave-active { transition: opacity .2s; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
+
+.slide-up-enter-active { transition: all .25s ease; }
+.slide-up-enter-from { transform: translateY(12px); opacity: 0; }

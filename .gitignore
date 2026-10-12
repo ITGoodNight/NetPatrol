@@ -1,0 +1,28 @@
+# ── Python ─────────────────────────────────────────────
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# ── Node / 前端 ────────────────────────────────────────
+node_modules/
+dist/
+frontend/dist/
+
+# ── PyInstaller 打包产物 ───────────────────────────────
+build/
+
+# ── 运行时数据（含密码/真实设备回显，切勿提交）─────────
+reports/
+inspection_history.json
+config/config.json
+*.xlsx
+
+# ── 本地工具与编辑器 ───────────────────────────────────
+.claude/
+.vscode/
+.idea/
+*.log
+.DS_Store
+Thumbs.db

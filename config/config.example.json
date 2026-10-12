@@ -1,0 +1,12 @@
+{
+  "output_format": "HTML",
+  "enable_schedule": false,
+  "schedule_mode": "daily",
+  "schedule_time": "09:00",
+  "schedule_date": "",
+  "schedule_count": 1,
+  "max_workers": 10,
+  "retry_count": 0,
+  "enable_result_notify": false,
+  "schedule_devices": []
+}
