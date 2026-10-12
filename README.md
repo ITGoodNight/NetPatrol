@@ -19,11 +19,7 @@
 
 ## 技术栈
 
-| 层 | 技术 |
-|---|---|
-| 后端 | FastAPI · uvicorn · Netmiko |
-| 前端 | Vue 3 · Vite · Ant Design Vue · axios · dayjs |
-| 打包 | PyInstaller |
+后端基于 FastAPI 与 uvicorn 构建，网络设备连接由 Netmiko 完成；前端采用 Vue 3 + Vite，界面组件使用 Ant Design Vue；应用最终通过 PyInstaller 打包为免安装的单机程序。
 
 ## 快速开始
 
@@ -40,44 +36,35 @@ cd frontend && npm install && npm run build && cd ..
 python run_app.py
 ```
 
-> 改动前端（`frontend/`）要先 `npm run build` 重新构建，之后**刷新浏览器**即可，不用重启后端；
-> 改动后端（`backend/`、`modules/`）必须重启进程。
->
-> ⚠️ 后端**只在启动时**检查 `frontend/dist` 是否存在，所以请**先构建、后启动**；
-> 若启动时前端尚未构建，之后补构建也需要重启才生效。
+前端资源由后端在每次请求时从磁盘读取，因此调整 `frontend/` 后，只需重新执行 `npm run build` 并刷新浏览器即可，无需重启服务；而后端代码（`backend/`、`modules/`）在进程启动时载入，修改后必须重启进程才会生效。
 
-**前端开发模式（可选）**
+需要注意，服务仅在启动阶段检查 `frontend/dist` 是否存在。若启动时前端尚未构建，之后即使补上构建，也需要重启一次才能正常访问。
+
+如需单独调整界面，可另起前端开发服务器，它已配置将 `/api` 代理至后端：
 
 ```bash
-cd frontend && npm run dev     # http://localhost:5173，/api 已自动代理到 8000
+cd frontend && npm run dev
 ```
 
-## 打包成 exe
+随后访问 http://localhost:5173 即可，页面改动支持热更新。
+
+## 打包为可执行文件
 
 ```bash
 pyinstaller NetPatrol.spec
 ```
 
-产物在 `dist/NetPatrol/`。
+打包完成后，可执行文件位于 `dist/NetPatrol/` 目录，可整体拷贝到未安装 Python 的机器上直接运行。
 
 ## 使用说明
 
 ### 添加设备
 
-在界面右上角点「添加设备」，填写以下信息：
+在界面右上角点击「添加设备」即可录入设备。其中**设备名称、设备类型、IP 地址、用户名、密码**为必填项；端口号与连接类型可以留空，此时按连接方式自动取默认值（SSH 为 `22`，Telnet 为 `23`）；若设备需要进入特权模式执行命令，请一并填写「提权密码」。
 
-| 字段 | 必填 | 说明 |
-|---|---|---|
-| 设备名称 | 是 | 如 `Core-SW-01` |
-| 设备类型 | 是 | `huawei` / `h3c` / `cisco` / `ruijie` / `zte`，或自定义 Netmiko 驱动名 |
-| IP地址 | 是 | 管理地址 |
-| 端口号 | 否 | 默认 SSH `22` / Telnet `23` |
-| 连接类型 | 否 | `ssh`（默认）/ `telnet` |
-| 用户名 | 是 | |
-| 密码 | 是 | |
-| 提权密码 | 否 | enable 密码 |
+设备类型支持 `huawei`、`h3c`、`cisco`、`ruijie`、`zte` 五种常见厂商，也可以直接填写 Netmiko 的驱动名称，以便对接其它品牌设备。
 
-设备列表保存在浏览器本地（localStorage），下次打开自动载入。
+录入的设备会保存在浏览器本地，下次打开页面时自动载入。
 
 ### 巡检命令（`config/commands.txt`）
 
