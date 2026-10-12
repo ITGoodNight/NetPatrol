@@ -8,7 +8,7 @@
 
 ## 功能
 
-- **批量巡检** — 导入 Excel 设备清单或手动录入，多线程并发执行
+- **批量巡检** — 录入设备清单后多线程并发执行
 - **多厂商** — 华为 / H3C / 思科 / 锐捷 / 中兴，支持 SSH、Telnet，可自定义 Netmiko 驱动
 - **命令可配** — 按厂商自定义巡检命令（`config/commands.txt`）
 - **报告输出** — 每台设备生成 HTML 或 TXT 报告，可在线预览、下载、批量清理
@@ -58,11 +58,11 @@ pyinstaller NetPatrol.spec
 
 ## 使用说明
 
-### 设备清单（Excel）
+### 添加设备
 
-支持上传 `.xlsx`，表头需包含以下列（顺序不限）：
+在界面右上角点「添加设备」，填写以下信息：
 
-| 列名 | 必填 | 说明 |
+| 字段 | 必填 | 说明 |
 |---|---|---|
 | 设备名称 | 是 | 如 `Core-SW-01` |
 | 设备类型 | 是 | `huawei` / `h3c` / `cisco` / `ruijie` / `zte`，或自定义 Netmiko 驱动名 |
@@ -73,7 +73,7 @@ pyinstaller NetPatrol.spec
 | 密码 | 是 | |
 | 提权密码 | 否 | enable 密码 |
 
-也可以在界面里点「添加设备」手动录入。
+设备列表保存在浏览器本地（localStorage），下次打开自动载入。
 
 ### 巡检命令（`config/commands.txt`）
 
@@ -103,7 +103,7 @@ cp config/config.example.json config/config.json
 NetPatrol/
 ├─ run_app.py          启动入口
 ├─ backend/            FastAPI 后端（路由 / WebSocket / 定时调度 / 历史）
-├─ modules/            巡检引擎（Netmiko 连接、报告生成、Excel 解析）
+├─ modules/            巡检引擎（Netmiko 连接、设备解析、报告生成）
 ├─ config/             commands.txt（巡检命令）· config.json（系统设置）
 ├─ frontend/           Vue 3 前端
 └─ reports/            巡检报告输出目录（运行时生成）
