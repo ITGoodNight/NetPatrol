@@ -21,6 +21,7 @@ config/config.json
 
 # ── 本地工具与编辑器 ───────────────────────────────────
 .claude/
+.mcp.json
 .vscode/
 .idea/
 *.log

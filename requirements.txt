@@ -2,5 +2,8 @@ fastapi>=0.110.0
 uvicorn[standard]>=0.29.0
 websockets>=12.0
 netmiko>=4.3.0
+# paramiko 5.0 移除了 SHA-1 系密钥交换与 ssh-rsa 主机密钥，而老交换机/路由器只支持这些，
+# 锁定 4.x 以保持对旧设备的兼容（等同于 netmiko 官方的 netmiko[par4] 组合）
+paramiko>=4.0,<5
 pydantic>=2.0.0
 pyinstaller>=6.0.0
